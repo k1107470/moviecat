@@ -24,7 +24,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
        } else if (now.startsWith('/top250')) {
          $scope.type = 'top250';
        }
-       console.log($scope.type);
+       //console.log($scope.type);
      });
    }
  ])
