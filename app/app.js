@@ -14,7 +14,8 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
  .controller('appController', [
    '$scope',
    '$location',
-   function($scope, $location) {
+   '$route',
+   function($scope, $location,$route) {
      $scope.$location = $location;
      $scope.$watch('$location.path()', function(now) {
        if (now.startsWith('/in_theaters')) {
@@ -25,6 +26,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
          $scope.type = 'top250';
        }
        //console.log($scope.type);
+		$scope.input = '';
+		$scope.search = function(){
+			$route.updateParams({ category: 'search', q: $scope.input });
+		}
      });
    }
  ])

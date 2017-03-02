@@ -34,11 +34,11 @@
 			//当前的页数
 			$scope.currentPage = page;
 			//
-			$scope.currentCategory  = $routeParams.category;
+			$scope.currentCategory = $routeParams.category;
 			$scope.subjects = [];
 			jsonp.json(
-				'https://api.douban.com/v2/movie/'+$routeParams.category,
-				{count: count, start: start},
+				'https://api.douban.com/v2/movie/' + $routeParams.category,
+				{count: count, start: start, q: $routeParams.q},
 				function (data) {
 					//console.log(data);
 					$scope.subjects = data.subjects;
@@ -53,11 +53,11 @@
 					$scope.goTO = function (page) {
 						//限定可被点击的范围[1，totalPages]
 						if (page >= 1 && page <= $scope.totalPages)
-							$route.updateParams({ page: page });
+							$route.updateParams({page: page});
 					};
 					/*
-					console.log($scope.currentCategory);
-					console.log($scope.currentCategory=='in_theaters');*/
+					 console.log($scope.currentCategory);
+					 console.log($scope.currentCategory=='in_theaters');*/
 				}
 			)
 		}]);
