@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<h2 class="page-header">{{title}}</h2>
 
-</body>
-</html>
+<div class="list-group">
+	<a href="#" ng-repeat="item in subjects" class="list-group-item ">
+		<span class="badge">{{item.rating.average}}</span>
+		<div class="media">
+			<div class="media-left">
+				<img class="media-object" ng-src="{{item.images.small}}" alt="item.title">
+			</div>
+			<div class="media-body">
+				<h4 class="media-heading">{{item.title}}</h4>
+				<p>导演：<span ng-repeat="i in item.directors">{{i.name}}<span ng-if="!$last">、</span></span></p>
+				<p>类型：<span >{{item.genres.join('、')}}</span></p>
+				<p>主演：<span ng-repeat="i in item.casts">{{i.name}}<span ng-if="!$last">、</span></span></p>
+			</div>
+		</div>
+	</a>
+</div>
+<div class="loading" ng-show="loading">
+	<span></span>
+	<span></span>
+	<span></span>
+	<span></span>
+	<span></span>
+</div>
+<div id="bottom" ng-hide="loading">
+	<nav>
+		<ul class="pager">
+			<li><a ng-class="{disabled:currentPage==1}" ng-click="goTO(currentPage-1)">&lt;&lt;上一页</a></li>
+			<li><a ng-class="{disabled:currentPage==totalPages}" ng-click="goTO(currentPage+1)">下一页&gt;&gt;</a></li>
+		</ul>
+	</nav>
+	<p>总计 <span>{{total}}</span>消息， <span>{{currentPage}}</span>/<span>{{totalPages}}</span>页</p>
+
+</div>

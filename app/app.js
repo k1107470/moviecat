@@ -10,5 +10,5 @@ var app = angular.module('myApp', [
 ]);
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 	$locationProvider.hashPrefix('');
-	$routeProvider.otherwise({redirectTo: '/in_theaters'});
+	$routeProvider.otherwise({redirectTo: '/in_theaters/1'});
 }]);
