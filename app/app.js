@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
 	'ngRoute',
+	'app.movie_details',
 	'app.movie_list'
 
 ]);
@@ -15,8 +16,9 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
    '$scope',
    '$location',
    '$route',
-   function($scope, $location,$route) {
+   function($scope, $location/*,$route*/) {
      $scope.$location = $location;
+     window.local = $location;
      $scope.$watch('$location.path()', function(now) {
        if (now.startsWith('/in_theaters')) {
          $scope.type = 'in_theaters';
@@ -28,7 +30,9 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
        //console.log($scope.type);
 		$scope.input = '';
 		$scope.search = function(){
-			$route.updateParams({ category: 'search', q: $scope.input });
+			//$route.updateParams({ category: 'search', q: $scope.input });
+			//解决在细节页面上无法搜索的bug
+			$location.url('/search/1'+'?q='+$scope.input);
 		}
      });
    }
