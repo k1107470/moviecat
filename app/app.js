@@ -11,12 +11,18 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 	//去除html5造成的地址栏中#后自动添加前缀乱码
 	$locationProvider.hashPrefix('');
 	$routeProvider.otherwise({redirectTo: '/in_theaters/1'});
-}])
+}]).constant('AppConfig', {
+		pageSize: 10,
+		listApiAddress: 'http://api.douban.com/v2/movie/',
+		detailApiAddress: 'http://api.douban.com/v2/movie/subject/'
+	})
  .controller('appController', [
    '$scope',
    '$location',
-   '$route',
-   function($scope, $location/*,$route*/) {
+   /*'$route',*/
+   'AppConfig',
+   function($scope, $location,AppConfig/*,$route*/) {
+	 console.log(AppConfig);
      $scope.$location = $location;
      window.local = $location;
      $scope.$watch('$location.path()', function(now) {

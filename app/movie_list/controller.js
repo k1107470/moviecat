@@ -16,13 +16,14 @@
 	}]);
 	//配置了单独的控制器
 	module.controller('MovieListController', [
-		'$scope', '$route', '$routeParams', 'jsonp',
-		function ($scope, $route, $routeParams, jsonp) {
+		'$scope', '$route', '$routeParams', 'jsonp','AppConfig',
+		function ($scope, $route, $routeParams, jsonp,AppConfig) {
+			console.log(AppConfig);
 			//console.log($routeParams.page);
 			$scope.loading = true;
 			$scope.title = "";
 			//设置默认的单页显示信息数
-			var count = 10;
+			var count = AppConfig.pageSize;
 			//获取当前的地址栏的页数
 			var page = parseInt($routeParams.page);
 			//计算当前页展示的第一条信息的位置
@@ -37,7 +38,7 @@
 			$scope.currentCategory = $routeParams.category;
 			$scope.subjects = [];
 			jsonp.json(
-				'https://api.douban.com/v2/movie/' + $routeParams.category,
+				AppConfig.listApiAddress + $routeParams.category,
 				{count: count, start: start, q: $routeParams.q},
 				function (data) {
 					//console.log(data);

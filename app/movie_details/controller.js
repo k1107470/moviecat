@@ -16,11 +16,11 @@
 	}]);
 	//配置了单独的控制器
 	module.controller('MovieDetailsController', [
-		'$scope', '$route', '$routeParams', 'jsonp',
-		function ($scope, $route, $routeParams, jsonp) {
+		'$scope', '$route', '$routeParams', 'jsonp','AppConfig',
+		function ($scope, $route, $routeParams, jsonp,AppConfig) {
 			$scope.movie = [];
 			jsonp.json(
-				'https://api.douban.com/v2/movie/subject/'+$routeParams.id,
+				AppConfig.detailApiAddress+$routeParams.id,
 				{},
 				function(data){
 					$scope.movie = data;
